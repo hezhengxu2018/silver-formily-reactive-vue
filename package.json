@@ -1,0 +1,60 @@
+{
+  "name": "@silver-formily/reactive-vue",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Another @formily/reactive-vue",
+  "author": "Hezhengxu",
+  "license": "MIT",
+  "homepage": "https://reactive-vue.silver-formily.org",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/hezhengxu2018/silver-formily-reactive-vue"
+  },
+  "bugs": {
+    "url": "https://github.com/hezhengxu2018/silver-formily-reactive-vue/issues"
+  },
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "lint": "eslint ./ --fix",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build",
+    "commit": "czg",
+    "lint-staged": "lint-staged"
+  },
+  "peerDependencies": {
+    "@formily/reactive": "^2",
+    "vue": "^3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.19.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.36.0",
+    "@eslint/markdown": "^6.6.0",
+    "@release-it/conventional-changelog": "^10.0.1",
+    "@types/node": "^25.0.3",
+    "bumpp": "^10.3.2",
+    "cz-git": "^1.12.0",
+    "czg": "^1.12.0",
+    "eslint": "^9.36.0",
+    "eslint-plugin-unicorn": "^59.0.1",
+    "eslint-plugin-vue": "^10.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3",
+    "tsdown": "^0.18.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
+  }
+}
