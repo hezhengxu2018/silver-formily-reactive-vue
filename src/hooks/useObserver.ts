@@ -1,51 +1,54 @@
-import type { ComponentInternalInstance } from 'vue'
 import type { IObserverOptions } from '../types'
 import { Tracker } from '@formily/reactive'
 import { getCurrentInstance, onBeforeUnmount } from 'vue'
-
-type UpdateJob = NonNullable<ComponentInternalInstance['update']>
-
-const OBSERVER_DISPOSE_MAP = new WeakMap<ComponentInternalInstance, () => void>()
-const DEFAULT_SCHEDULER = (job: () => void) => job()
 
 export function useObserver(options?: IObserverOptions) {
   const vm = getCurrentInstance()
   if (!vm) {
     throw new Error('useObserver must be called within a setup function.')
   }
-
-  if (OBSERVER_DISPOSE_MAP.has(vm)) {
-    return
-  }
-
-  const runScheduler
-    = typeof options?.scheduler === 'function' ? options.scheduler : DEFAULT_SCHEDULER
-
-  const originalUpdate: UpdateJob = vm.update
-
-  const tracker = new Tracker(() => {
-    runScheduler(() => {
-      vm.update()
-    })
-  })
-
-  const trackedUpdate: UpdateJob = () => {
-    tracker.track(() => {
-      originalUpdate()
-    })
-  }
-
-  vm.update = trackedUpdate
-
-  const dispose = () => {
-    if (OBSERVER_DISPOSE_MAP.get(vm) !== dispose) {
-      return
+  let tracker: Tracker | null = null
+  const disposeTracker = () => {
+    if (tracker) {
+      tracker.dispose()
+      tracker = null
     }
-    tracker.dispose()
-    vm.update = originalUpdate
-    OBSERVER_DISPOSE_MAP.delete(vm)
+  }
+  const vmUpdate = () => {
+    vm?.proxy?.$forceUpdate()
   }
 
-  OBSERVER_DISPOSE_MAP.set(vm, dispose)
-  onBeforeUnmount(dispose)
+  onBeforeUnmount(disposeTracker)
+
+  Object.defineProperty(vm, 'effect', {
+    get() {
+      // https://github.com/alibaba/formily/issues/2655
+      return vm._updateEffect || {}
+    },
+    set(newValue) {
+      vm._updateEffectRun = newValue.run
+      disposeTracker()
+      const newTracker = () => {
+        tracker = new Tracker(() => {
+          if (options?.scheduler && typeof options.scheduler === 'function') {
+            options.scheduler(vmUpdate)
+          }
+          else {
+            vmUpdate()
+          }
+        })
+      }
+
+      const update = function () {
+        let refn = null
+        tracker?.track(() => {
+          refn = vm._updateEffectRun.call(newValue)
+        })
+        return refn
+      }
+      newTracker()
+      newValue.run = update
+      vm._updateEffect = newValue
+    },
+  })
 }
