@@ -1,12 +1,26 @@
+import type { ComponentInternalInstance } from 'vue'
 import type { IObserverOptions } from '../types'
 import { Tracker } from '@formily/reactive'
 import { getCurrentInstance, onBeforeUnmount } from 'vue'
 
+interface InternalRenderEffect {
+  run: (this: InternalRenderEffect, ...args: any[]) => any
+}
+
+type RenderEffectRunner = InternalRenderEffect['run']
+
+type ObserverComponentInstance = ComponentInternalInstance & {
+  effect?: InternalRenderEffect
+  _updateEffect?: InternalRenderEffect
+  _updateEffectRun?: RenderEffectRunner
+}
+
 export function useObserver(options?: IObserverOptions) {
-  const vm = getCurrentInstance()
-  if (!vm) {
+  const instance = getCurrentInstance()
+  if (!instance) {
     throw new Error('useObserver must be called within a setup function.')
   }
+  const vm = instance as ObserverComponentInstance
   let tracker: Tracker | null = null
   const disposeTracker = () => {
     if (tracker) {
@@ -42,7 +56,10 @@ export function useObserver(options?: IObserverOptions) {
       const update = function () {
         let refn = null
         tracker?.track(() => {
-          refn = vm._updateEffectRun.call(newValue)
+          const effectRunner = vm._updateEffectRun
+          if (effectRunner) {
+            refn = effectRunner.call(newValue)
+          }
         })
         return refn
       }
