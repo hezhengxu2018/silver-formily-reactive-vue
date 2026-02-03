@@ -56,6 +56,7 @@ function handleInput(event: Event) {
 ## 📚 文档与示例
 
 - 官网（VitePress）：<https://reactive-vue.silver-formily.org>
+- English docs：<https://reactive-vue.silver-formily.org/en/>（或在文档站右上角切换语言）
 - 快速入门、API、Demo：`docs/index.md`
 - 运行文档站点：`pnpm docs:dev`
 

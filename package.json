@@ -40,6 +40,9 @@
     "@formily/reactive": "^2",
     "vue": "^3"
   },
+  "dependencies": {
+    "@silver-formily/reactive-vue": "^1.0.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^4.19.0",
     "@commitlint/cli": "^19.8.1",

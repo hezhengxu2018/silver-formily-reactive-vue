@@ -36,8 +36,20 @@ export default defineConfig<EPThemeConfig>({
     },
   },
   // 站点配置
-  title: 'Silver Formily Reactive Vue',
-  description: 'Vue3 的 @formily/reactive-vue 封装',
+  locales: {
+    root: {
+      label: '简体中文',
+      lang: 'zh-CN',
+      title: 'Silver Formily Reactive Vue',
+      description: 'Vue3 的 @formily/reactive-vue 封装',
+    },
+    en: {
+      label: 'English',
+      lang: 'en-US',
+      title: 'Silver Formily Reactive Vue',
+      description: 'Vue 3 wrapper for @formily/reactive',
+    },
+  },
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { name: 'theme-color', content: '#3b82f6' }],
@@ -73,14 +85,46 @@ export default defineConfig<EPThemeConfig>({
     search: {
       provider: 'local',
     },
-    sidebar: [
-      {
-        text: '指南',
-        items: [
-          { text: '快速上手', link: '/' },
-          { text: 'API 文档', link: '/api' },
-        ],
-      },
+    sidebar: {
+      '/': [
+        {
+          text: '指南',
+          items: [
+            { text: '快速上手', link: '/' },
+            { text: 'API 文档', link: '/api' },
+          ],
+        },
+      ],
+      '/en/': [
+        {
+          text: 'Guide',
+          items: [
+            { text: 'Quick Start', link: '/en/' },
+            { text: 'API Reference', link: '/en/api' },
+          ],
+        },
+      ],
+    },
+    footer: {
+      message: 'Released under the MIT License.',
+      blogroll: [
+        {
+          title: 'Formily',
+          children: [
+            { text: 'Reactive', link: 'https://reactive.formilyjs.org/' },
+          ],
+        },
+        {
+          title: 'Silver Formily',
+          children: [
+            { text: 'Element Plus', link: 'https://element-plus.silver-formily.org/' },
+            { text: 'Vue', link: 'https://vue.silver-formily.org/' },
+          ],
+        },
+      ],
+    },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/hezhengxu2018/silver-formily-reactive-vue' },
     ],
     version: pkg.version,
     externalLinkIcon: true,

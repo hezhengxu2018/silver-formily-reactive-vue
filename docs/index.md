@@ -3,11 +3,11 @@
 ## 安装
 
 ::: code-group
-```bash [pnpm install]
+```bash [pnpm]
 pnpm add @silver-formily/reactive-vue @formily/reactive
 ```
 
-```bash [npm install]
+```bash [npm]
 npm install @silver-formily/reactive-vue @formily/reactive
 ```
 

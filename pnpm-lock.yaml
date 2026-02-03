@@ -11,6 +11,9 @@ importers:
       '@formily/reactive':
         specifier: ^2
         version: 2.3.7
+      '@silver-formily/reactive-vue':
+        specifier: ^1.0.0
+        version: 1.0.0(@formily/reactive@2.3.7)(vue@3.5.27(typescript@5.9.3))
       vue:
         specifier: ^3
         version: 3.5.27(typescript@5.9.3)
@@ -1211,6 +1214,12 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@silver-formily/reactive-vue@1.0.0':
+    resolution: {integrity: sha512-BX6lN9FO10l1z+ACrKyHWoMx0dcwSl/QbS6TRrh0cV/CveX2C7qgystnyMkTWY1h2Ouf2kRI7gFlh+pPG01tNQ==}
+    peerDependencies:
+      '@formily/reactive': ^2
+      vue: ^3
 
   '@simple-libs/child-process-utils@1.0.1':
     resolution: {integrity: sha512-3nWd8irxvDI6v856wpPCHZ+08iQR0oHTZfzAZmnbsLzf+Sf1odraP6uKOHDZToXq3RPRV/LbqGVlSCogm9cJjg==}
@@ -5932,6 +5941,11 @@ snapshots:
       '@types/hast': 3.0.4
 
   '@shikijs/vscode-textmate@10.0.2': {}
+
+  '@silver-formily/reactive-vue@1.0.0(@formily/reactive@2.3.7)(vue@3.5.27(typescript@5.9.3))':
+    dependencies:
+      '@formily/reactive': 2.3.7
+      vue: 3.5.27(typescript@5.9.3)
 
   '@simple-libs/child-process-utils@1.0.1':
     dependencies:
