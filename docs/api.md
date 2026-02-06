@@ -1,5 +1,9 @@
 # API
 
+`observer` 的实现原理是对传入的组件返回一个包裹组件（HOC），在组件内调用 `useObserver` 因此会额外产生一层组件。如果你正在封装组件，那么在组件内使用 `useObserver` 来实现响应式的同步是更直接的方式。 `observer` 本身是`@formily/vue` 为了兼容 Vue2 的实现所产生的，在 Vue3 的封装中应该优先使用 `useObserver`。
+
+另外 `useObserver` 内部使用了 Vue3 未暴露的接口改写了内部响应式的更新方式。如果你不希望使用 hack 的方式解决响应式同步的问题，那么使用`formilyComputed`是更透明直接的选择，对于自己封装的组件基本都可以绕过`useObserver`的使用。
+
 ## observer
 
 ### 描述

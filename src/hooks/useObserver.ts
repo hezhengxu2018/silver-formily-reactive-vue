@@ -36,7 +36,6 @@ export function useObserver(options?: IObserverOptions) {
 
   Object.defineProperty(vm, 'effect', {
     get() {
-      // https://github.com/alibaba/formily/issues/2655
       return vm._updateEffect || {}
     },
     set(newValue) {

@@ -69,7 +69,7 @@
     "vitepress": "2.0.0-alpha.16",
     "vitepress-better-demo-plugin": "^0.6.2",
     "vitepress-plugin-group-icons": "^1.7.1",
-    "vitepress-theme-element-plus": "^1.1.4",
+    "vitepress-theme-element-plus": "^1.2.0",
     "vitest": "^4.0.16"
   },
   "lint-staged": {

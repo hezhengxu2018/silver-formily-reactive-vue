@@ -1,5 +1,9 @@
 # API
 
+`observer` returns a higher-order component that wraps whatever you pass in, so calling `useObserver` from inside a component still inserts an extra level in the tree. If you are building your own components, prefer calling `useObserver` directly so the reactive syncing stays local. The `observer` helper exists in `@formily/vue` primarily to keep Vue 2 compatibility, but for Vue 3-centric codebases the hook should be your first choice.
+
+Internally, `useObserver` rewires Vue 3 reactivity with a non-public API. If you would rather avoid that hack, reach for `formilyComputed`, which exposes the Formily reaction as a standard Vue `ComputedRef` so most custom wrappers never need to touch `useObserver`.
+
 ## observer
 
 ### Description
