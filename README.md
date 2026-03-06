@@ -2,6 +2,11 @@
 
 > 🧠 使用 Vue3 封装的 `@formily/reactive-vue`。
 
+> [!IMPORTANT]
+> 中文：本仓库中的代码已迁移至 <https://github.com/hezhengxu2018/silver-formily>，当前仓库已归档（archived），不再继续维护。
+>
+> English: The code in this repository has been migrated to <https://github.com/hezhengxu2018/silver-formily>. This repository has been archived and is no longer maintained.
+
 ## ✨ 特性
 
 - **`observer` / `useObserver`**：把组件渲染函数托管给 Formily Tracker，自动收集依赖并精准更新。
